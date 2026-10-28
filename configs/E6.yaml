@@ -1,0 +1,21 @@
+# E6: SIMULATED source metadata (scenario analysis, NOT a measurement).
+# The scraped corpus has real channel metadata only for official posts, so source features are simulated per class.
+# Values are assumptions chosen to be plausible, and the paper must present E6 as a scenario analysis.
+seed: 2026
+features:
+  channel_official:        # Bernoulli: message comes from a verified official channel
+    credible: 0.85
+    misinfo: 0.03
+    forged_alert: 0.10     # impersonation sometimes succeeds via compromised/lookalike channels
+  account_age_days:        # lognormal(mu, sigma) of the sender account age
+    credible: [7.0, 0.8]
+    misinfo: [5.5, 1.2]
+    forged_alert: [3.5, 1.5]
+  repost_burst:            # gamma(shape, scale): reposts in the first hour relative to channel baseline
+    credible: [2.0, 1.0]
+    misinfo: [2.5, 2.0]
+    forged_alert: [3.0, 2.5]
+thresholds:
+  max_missed_forgery: 0.01   # constraint on val: share of forged_alert that get `publish`
+  max_false_block: 0.01      # block threshold: share of credible that get `block` on val
+content_source: E5/M6_D3+aware   # D4 = full method (Layer 1 + adversarially trained Layer 2)

@@ -1,0 +1,12 @@
+# data, weights and generated outputs are not part of the repository
+data/
+models/
+results/
+figures/
+tables/
+logs/
+.hf_cache/
+.venv/
+__pycache__/
+*.pyc
+paper_numbers.json
